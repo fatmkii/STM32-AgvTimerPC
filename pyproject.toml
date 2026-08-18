@@ -1,0 +1,33 @@
+[build-system]
+requires = ["hatchling>=1.25"]
+build-backend = "hatchling.build"
+
+[project]
+name = "stm32-agv-timer"
+version = "0.1.0"
+description = "PC measurement tool for STM32 AGV passing intervals"
+readme = "README.md"
+requires-python = ">=3.12,<3.13"
+dependencies = [
+    "PySide6>=6.7,<7",
+    "pyserial>=3.5,<4",
+]
+
+[project.scripts]
+agv-timer = "agv_timer.app:main"
+
+[dependency-groups]
+dev = [
+    "pytest>=8.0,<9",
+    "pytest-qt>=4.4,<5",
+]
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/agv_timer"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+qt_api = "pyside6"
+
+[tool.uv]
+default-groups = ["dev"]
